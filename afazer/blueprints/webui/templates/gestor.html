@@ -1,0 +1,34 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}{{config.get('TITLE')}}{% endblock %}
+
+{% block navbar %}
+<div class="navbar">
+<div class="navbar-header">
+    <a class="navbar-brand" href="#">
+
+    </a>
+</div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<h1>{{config.get('TITLE')}}</h1>
+
+<div class="jumbotron">
+<ul class="list-group">
+    <h3>Menu De Gestão</h3>
+    <li class="list-group-item">
+        <a href="{{url_for('webui.atividadeview')}}">{{"Visualizar Atividades"}}</a>
+    </li>
+    <li class="list-group-item">
+        <a href="{{url_for('webui.gerenciaratividadesview')}}">{{"Gerenciar Atividades"}}</a>
+    </li>
+</ul>
+</div>
+
+</div>
+{% endblock %}
+
+
+
