@@ -1,0 +1,52 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}{{config.get('TITLE')}}{% endblock %}
+
+{% block navbar %}
+<style>
+    a{
+    float: right;
+    }
+</style>
+
+<div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+
+                    <div  class="navbar-menu">
+                        <div class="navbar-end">
+                            <a href="{{ url_for('webui.sair') }}" class="navbar-item">
+                                Sair
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<h1>{{config.get('TITLE')}}</h1>
+
+<div class="jumbotron">
+<ul class="list-group">
+        <h2>Suas Atividades</h2>
+    {% for atividade in atividades %}
+    <li class="list-group-item">
+        <p class="text-capitalize">{{ atividade["nome"] }}</p>
+        <select class="form-control">
+          <option>A fazer</option>
+          <option>Fazendo</option>
+          <option>Finalizado</option>
+        </select>
+    </li>
+    {% endfor %}
+</ul>
+</div>
+
+</div>
+{% endblock %}
+
+
+
