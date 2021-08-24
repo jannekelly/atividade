@@ -1,45 +1,101 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}{{config.get('TITLE')}}{% endblock %}
+{% extends "base.html" %}
 
-{% block navbar %}
-<div class="navbar">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">
-
-        </a>
-    </div>
-</div>
-{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1>{{config.get('TITLE')}}</h1>
-    <h2>Suas Atividades</h2>
-    <table class="table table-striped  table-hover ">
-        <caption></caption>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for atividade in atividades %}
-        <tr>
-            <th scope="row">{{ atividade["id"] }}</th>
-            <td>{{ atividade["nome"] }}</td>
-            <td>{{ atividade["status"] }}</td>
-            <td>
-                <a class="icon" href="#"
-                   title="Editar">
-                    <span class="fa fa-pencil glyphicon glyphicon-pencil"></span>
-                </a>
-            </td>
-        </tr>
-        {% endfor %}
-        </tbody>
+
+
+<div id="main" class="container">
+
+    <div id="top" class="row">
+        <div class="col-md-3">
+            <h2>Atividades</h2>
+        </div>
+
+        <div class="col-md-6">
+            <div class="input-group h2">
+                <input name="data[search]" class="form-control" id="search" type="text"
+                       placeholder="Pesquisar Atividade">
+                <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+            </div>
+        </div>
+        {% if current_user.tipo_usuario=="gestor" %}
+        <div class="col-md-3">
+            <a href="{{url_for('webui.gestorcriar')}}" class="btn btn-primary pull-right h2">Nova Atividade</a>
+        </div>
+        {%endif%}
+
+    </div> <!-- /#top -->
+
+    <div id="list" class="row">
+
+        <table class="table table-striped  table-hover ">
+            <caption></caption>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Status</th>
+                {% if current_user.tipo_usuario=="gestor" %}
+                <th>Responsável</th>
+                {%endif%}
+            </tr>
+            </thead>
+            <tbody>
+            {% for atividade in atividades %}
+
+            <tr>
+                <th scope="row">{{ atividade['id'] }} <input name="th2" type="hidden" value={{atividade.id}}>
+                </th>
+                <td>{{ atividade["nome"] }}</td>
+                <td>{{ atividade["status"] }}</td>
+                {% if current_user.tipo_usuario=="gestor" %}
+                <td>{{atividade["pessoa"].nome}}</td>
+
+                <td>
+                    <a class="icon" href="{{url_for('webui.editarview',id=atividade.id)}}"
+                       title="Editar">
+                        <span class="fa fa-pencil glyphicon glyphicon-pencil"></span>
+                    </a>
+                </td>
+                <td>
+                    <a class="icon" href="{{url_for('webui.excluirview',id=atividade.id)}}"
+                       title="Excluir">
+                        <span class="fa fa-trash glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+                {%else%}
+                <td>
+                        <a href="{{url_for('webui.editar',id=atividade.id)}}">
+
+                                <span class=" fa fa-pencil glyphicon glyphicon-pencil" data-toggle="modal"
+                                      data-target="#testeCoor">
+                                </span>
+                        </a>
+
+                 </td>
+
+
+    {%endif%}
+
+    </tr>
+
+    {% endfor %}
+
+
+    </tbody>
+
+
     </table>
 
-</div>
+
+</div> <!-- /#list -->
+
+
+</div>  <!-- /#main -->
+
+
 {% endblock %}

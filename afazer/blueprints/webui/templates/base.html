@@ -1,12 +1,31 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}This is an example page{% endblock %}
-
+{% extends "Bootstrap/base.html" %}
+{% block title%}{{config.get('TITLE')}}{% endblock %}
 {% block navbar %}
-<div class="navbar navbar-fixed-top">
-  <!-- ... -->
-</div>
-{% endblock %}
+<div class="navbar">
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Afazer</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{url_for('webui.sair')}}">Sair</a></li>
 
+            </ul>
+        </div>
+    </div>
+</nav>
+</div>
+
+
+{% endblock %}
 {% block content %}
-  <h1>Hello, Bootstrap</h1>
+
 {% endblock %}

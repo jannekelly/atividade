@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}{{config.get('TITLE')}}{% endblock %}
+
+
+{% block content %}
+
+<form method="POST" action="#">
+    <div id="main">
+        <div id="top" class="row">
+            <div class="text-center">
+                <h2>Atividades</h2>
+            </div>
+        </div>
+
+
+        <div id="list" class="container">
+            <div class="form-group row">
+                <label for="inputNome" class=" col-sm-offset-3 col-sm-1 control-label">Nome</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="inputNome" name="nome" placeholder="Nome da Atividade" required>
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <div>
+                    <label for="inputResponsavel" class=" col-sm-offset-3 col-sm-1 control-label"><b>
+                        Responsável </b></label>
+                    <div class="col-sm-4">
+                        <select type="text" name="responsavel" class="form-control custom-select " id="inputResponsavel"
+                                required>
+                            <option value="" selected="selected" disabled="disabled">
+                                Selecione um responsável
+                                {% for pessoa in pessoas %}
+                            </option>
+                            <option value="{{pessoa.pessoa.nome}}">{{pessoa.pessoa.nome}}</option>
+                            {%endfor%}
+
+                        </select>
+                    </div>
+
+                    <div class="invalid-feedback">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="text-center">
+
+
+            <button class="btn btn-primary btn-sm" data-dismiss="modal">Criar Atividade</button>
+
+        </div>
+    </div>
+
+
+</form>
+
+{% endblock %}
+
+
+
